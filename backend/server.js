@@ -6,8 +6,10 @@ import chalk from "chalk";
 dotenv.config();
 
 const app = express();
-
 const PORT = process.env.PORT || 5001;
+
+// middleware
+app.use(express.json());
 
 async function initDB() {
   try {
@@ -31,8 +33,26 @@ async function initDB() {
   }
 }
 
-app.get("/", (req, res) => {
-  res.send("It's working!");
+app.post("/api/transactions", async (req, res) => {
+  try {
+    const { title, amount, category, user_id } = req.body;
+
+    if (!title || amount == undefined || !category) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const transaction = await sql`
+      INSERT INTO transactions(user_id, title, amount, category)
+      VALUES (${user_id}, ${title}, ${amount}, ${category})
+      RETURNING *
+    `;
+
+    console.log(transaction);
+    res.status(201).json(transaction[0]);
+  } catch (error) {
+    console.log("Error creating transaction", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 initDB().then(() => {
