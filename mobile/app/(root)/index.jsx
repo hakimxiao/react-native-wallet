@@ -22,6 +22,9 @@ export default function Page() {
     <View>
       <SignedIn>
         <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
+        <Text>Pemasukkan: {sumary.pemasukkan}</Text>
+        <Text>pengeluaran: {sumary.pengeluaran}</Text>
+        <Text>saldo: {sumary.saldo}</Text>
         <SignOutButton />
       </SignedIn>
       <SignedOut>

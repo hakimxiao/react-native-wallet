@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
 
-const BE_API_URL = "http://192.168.122.50:5001/api";
+const BE_API_URL = "https://backend-rn-wallet.vercel.app/api";
 
 export const useTransactions = (userId) => {
   const [transaction, setTransaction] = useState();
