@@ -67,9 +67,15 @@ export default function Page() {
               resizeMode="contain"
             />
             <View style={styles.welcomeContainer}>
-              <Text style={styles.welcomeText}>Selamat datang,</Text>
+              <Text style={styles.welcomeText}>Halo,</Text>
               <Text style={styles.usernameText}>
-                {user?.emailAddresses[0]?.emailAddress.split("@")[0]}
+                {(() => {
+                  const name =
+                    user?.emailAddresses[0]?.emailAddress.split("@")[0] || "";
+                  return name.length > 10
+                    ? name.substring(0, 10) + "..."
+                    : name;
+                })()}
               </Text>
             </View>
           </View>
@@ -80,7 +86,6 @@ export default function Page() {
               onPress={() => router.push("/create")}
             >
               <Ionicons name="add" size={20} color="#FFF" />
-              <Text style={styles.addButtonText}>Tambah</Text>
             </TouchableOpacity>
             <SignOutButton />
           </View>
