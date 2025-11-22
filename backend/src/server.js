@@ -16,6 +16,10 @@ app.use(express.json());
 
 app.use("/api/transactions", transactionsRoute);
 
+app.get("/api/health", (req, res) => {
+  req.statusCode(200).json({ status: "ok" });
+});
+
 initDB().then(() => {
   app.listen(PORT, () => {
     console.log(

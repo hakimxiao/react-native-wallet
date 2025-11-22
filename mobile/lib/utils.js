@@ -9,3 +9,10 @@ export function formatDate(dateString) {
     day: "numeric",
   });
 }
+
+export const formatRupiah = (value) => {
+  if (!value) return "0";
+
+  const num = parseInt(value, 10);
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
