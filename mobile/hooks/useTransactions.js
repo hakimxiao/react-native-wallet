@@ -2,8 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
-
-const BE_API_URL = "https://backend-rn-wallet.vercel.app/api";
+import { API_URL } from "../constants/api";
 
 export const useTransactions = (userId) => {
   const [transaction, setTransaction] = useState();
@@ -17,7 +16,7 @@ export const useTransactions = (userId) => {
   // useCallback is used for performance reason, it will memoize the function
   const fetchTransactions = useCallback(async () => {
     try {
-      const response = await fetch(`${BE_API_URL}/transactions/${userId}`);
+      const response = await fetch(`${API_URL}/transactions/${userId}`);
       const data = await response.json();
       setTransaction(data);
     } catch (error) {
@@ -27,9 +26,7 @@ export const useTransactions = (userId) => {
 
   const fetchSumary = useCallback(async () => {
     try {
-      const response = await fetch(
-        `${BE_API_URL}/transactions/summary/${userId}`
-      );
+      const response = await fetch(`${API_URL}/transactions/summary/${userId}`);
       const data = await response.json();
       setSumary(data);
     } catch (error) {
@@ -53,7 +50,7 @@ export const useTransactions = (userId) => {
 
   const deleteTransaction = useCallback(async (id) => {
     try {
-      const response = await fetch(`${BE_API_URL}/transactions/${id}`, {
+      const response = await fetch(`${API_URL}/transactions/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete transaction");

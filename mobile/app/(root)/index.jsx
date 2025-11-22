@@ -1,5 +1,5 @@
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
-import { Link, useRouter } from "expo-router";
+import { useUser } from "@clerk/clerk-expo";
+import { useRouter } from "expo-router";
 import {
   Alert,
   FlatList,
@@ -80,7 +80,7 @@ export default function Page() {
               onPress={() => router.push("/create")}
             >
               <Ionicons name="add" size={20} color="#FFF" />
-              <Text style={styles.addButtonText}></Text>
+              <Text style={styles.addButtonText}>Tambah</Text>
             </TouchableOpacity>
             <SignOutButton />
           </View>
